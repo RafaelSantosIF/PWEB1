@@ -5,6 +5,7 @@ Este repositório foi criado para armazenar as listas de atividades da disciplin
 ## Estrutura do repositório
 
 - `Lista1/`: contém os arquivos da primeira lista de exercícios (L1Q1.js, L1Q2.js, ... L1Q9.js).
+- `DesafioTecnico/`: contém o Sistema de Gerenciamento de Tarefas (SGT.js), um projeto prático que simula operações de banco de dados usando Promises, setTimeout e async/await em Node.js.
 
 ## Objetivo
 
