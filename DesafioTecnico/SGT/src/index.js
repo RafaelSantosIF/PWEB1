@@ -3,7 +3,6 @@
 
 const App = require('./app/App');
 
-
 const app = new App();
 app.iniciar().catch(erro => {
     console.error("Erro ao iniciar a aplicação:", erro);

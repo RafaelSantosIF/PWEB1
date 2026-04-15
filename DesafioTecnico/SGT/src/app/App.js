@@ -15,6 +15,12 @@ class App {
             this.rl.question(prompt, resolve);
         });
     }
+
+    questionInterface(prompt) {
+        return new Promise((resolve) => {
+            this.rl.question(`\x1b[36m${prompt}\x1b[0m`, resolve);
+        });
+    }
     
     logInterface(message) {
         console.log("\x1b[36m%s\x1b[0m", message);
@@ -51,8 +57,8 @@ class App {
     }
     
     async adicionarTarefa() {
-        const title = await this.question("Título da tarefa: ");
-        const description = await this.question("Descrição da tarefa: ");
+        const title = await this.questionInterface("Título da tarefa: ");
+        const description = await this.questionInterface("Descrição da tarefa: ");
 
         try {
             const tarefa = await this.tarefaService.criar(title, description);
@@ -94,7 +100,7 @@ class App {
                 console.log(`ID: ${tarefa.id} | Título: ${tarefa.title} | Status: ${status}`);
             });
 
-            const id = await this.question("\nDigite o ID da tarefa para ver detalhes ou '0' para voltar: ");
+            const id = await this.questionInterface("\nDigite o ID da tarefa para ver detalhes ou '0' para voltar: ");
             const tarefaId = parseInt(id);
 
             if (tarefaId === 0) {
@@ -119,7 +125,7 @@ class App {
             console.log(`Status: ${tarefa.done ? "Concluída" : "Pendente"}`);
 
             if (!tarefa.done) {
-                const opcao = await this.question("\n1. Marcar como concluída | 2. Deletar | 3. Editar | 4. Voltar: ");
+                const opcao = await this.questionInterface("\n1. Marcar como concluída | 2. Deletar | 3. Editar | 4. Voltar: ");
                 if (opcao === '1') {
                     await this.tarefaService.marcarConcluida(tarefa.id);
                     this.logSucesso(`Tarefa "${tarefa.title}" marcada como concluída.`);
@@ -134,7 +140,7 @@ class App {
                     await this.mostrarMenu();
                 }
             } else {
-                const opcao = await this.question("\n1. Desmarcar | 2. Deletar | 3. Editar | 4. Voltar: ");
+                const opcao = await this.questionInterface("\n1. Desmarcar | 2. Deletar | 3. Editar | 4. Voltar: ");
                 if (opcao === '1') {
                     await this.tarefaService.desmarcar(tarefa.id);
                     this.logSucesso(`Tarefa "${tarefa.title}" desmarcada.`);
